@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 
+// Creates a table element with information handed down through props from the Home component
 function Task({task, index, updateTask, deleteTask, changeCompletionStatus}){
      const id = `task-${index}`;
      const updateInput = useRef();
@@ -19,12 +20,12 @@ function Task({task, index, updateTask, deleteTask, changeCompletionStatus}){
           </td>
           <td><input ref={dateInput} type="date" defaultValue={dueDate[0]}></input></td>
           <button onClick={()=>{
+               // Creates a task object to pass up to the home component, which will query the server
                const updatedTask = {
                     detail:updateInput.current.value,
                     dueDate:dateInput.current.value
                };
                updateTask(updatedTask, task._id);
-               // console.log(task);
           }}>Update task</button>
           <button onClick={()=>{
                deleteTask(task._id);

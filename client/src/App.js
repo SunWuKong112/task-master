@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/login" component={Login}></Route>
           {/*Path to form for new users to sign up*/}
           <Route exact path="/signup" component={Signup}></Route>
-          {/*Path to home page which*/}
+          {/*Path to users home page*/}
           <Route exact path="/home/:username" component={Home}></Route>
         </BrowserRouter>
       </header>

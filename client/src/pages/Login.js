@@ -10,6 +10,7 @@ function Login(){
      const [response, setResponse] = useState('');
      const {currentUser, setUser} = useContext(StoreContext);
 
+     // Redirects to the users home page once they have been successfully logged in
      useEffect(()=>{
           if(currentUser.username){
                const url = `/home/${currentUser.username}`;
@@ -17,7 +18,7 @@ function Login(){
           }
      }, [currentUser]);
 
-     /*Sends the user input to the server to facilitate login*/
+     // Sends the user input to the server to facilitate login
      function submitLogin(email, password){
           const user = {
                email:email,
@@ -42,7 +43,6 @@ function Login(){
                     passwordInput.current.value = "";
                }
           }).catch(err=>console.log(err));
-          // API.getUsers().then(response=>console.log(response)).catch(err=>console.log(err));
      }
 
      return(
@@ -51,24 +51,30 @@ function Login(){
                {response ? <p>{response}</p> : <span></span>}
                <form onSubmit={()=>submitLogin(emailInput.current.value, passwordInput.current.value)}>
                     <label htmlFor="emailInput">Email:</label>
+                    
                     <br/>
-                    <input href id="emailInput" name="emailInput" ref={emailInput} placeholder="johnDoe1234@gmail.com"
-                    // onkeypress={(e)=>clickPress(e)}
-                    ></input>
+
+                    <input href="true" id="emailInput" name="emailInput" ref={emailInput} placeholder="johnDoe1234@gmail.com"></input>
+
                     <br/>
                     <br/>
+
                     <label htmlFor="passwordInput">Password:</label>
+
                     <br/>
-                    <input id="passwordInput" name="passwordInput" ref={passwordInput} type="password" placeholder="ps1234"
-                    // onkeypress={(e)=>clickPress(e)}
+
+                    <input href="true" id="passwordInput" name="passwordInput" ref={passwordInput} type="password" placeholder="ps1234"
                     ></input>
+
                     <br/>
-                    <input type="button" value="login" onClick={()=>{
+
+                    <input href="true" type="button" value="login" onClick={()=>{
                          submitLogin(emailInput.current.value, passwordInput.current.value);
-                         
                     }}></input>
                </form>
-               <button href onClick={()=>history.push('/signup')}>Don't have an account?</button>
+
+               {/* Redirects the user to the sign up page */}
+               <button href="true" onClick={()=>history.push('/signup')}>Don't have an account?</button>
           </div>
      );
 }

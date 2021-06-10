@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// API access functions
 export default {
      login: function(user){
           return axios.post("/api/users/login", user);

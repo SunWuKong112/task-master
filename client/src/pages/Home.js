@@ -12,6 +12,7 @@ function Home(){
      const [tasks, setTasks] = useState([]);
      const {currentUser, setUser} = useContext(StoreContext);
 
+     // Sends a new task to the server
      function submitTask(title, detail, date){
           const task = {
                author_id: currentUser._id,
@@ -29,6 +30,8 @@ function Home(){
           });
      }
 
+     // Queries the server for all the users previously created tasks, or redirects the user to
+     // the login page if they are not logged in
      function getTasks(){
           if(currentUser._id){
                API.getTasks({author_id:currentUser._id})
@@ -44,10 +47,12 @@ function Home(){
           }
      }
 
+     // Automatically calls the getTasks function on loading the page
      useEffect(()=>{
           getTasks();
      }, [currentUser]);
 
+     // Sends a request to the server to update a task
      function updateTask(task, id){
           API.updateTask(task, id)
           .then(()=>{
@@ -55,6 +60,7 @@ function Home(){
           }).catch();
      }
 
+     // Sends a request to the server to delete a task
      function deleteTask(id){
           API.deleteTask(id)
           .then(()=>{
@@ -62,6 +68,7 @@ function Home(){
           }).catch();
      }
 
+     // Updates the completion status of a task
      function changeCompletionStatus(bool, id){
           const task = {
                completionStatus:bool
@@ -74,20 +81,33 @@ function Home(){
 
      return(
           <div>
+               {/* Logs the user out by setting the currentUser to [], activating the getTasks function which automatically redirects the user if there is no currentUser */}
                <button onClick={()=>{setUser([])}}>Log out</button>
                <form>
                     <label htmlFor="task-title">Enter task:</label>
+
                     <br/>
+
                     <input id="task-title" name="task-title" maxLength="10" ref={taskInput}></input>
+
                     <br/>
+
                     <label htmlFor="task-description">Enter Description:</label>
+
                     <br/>
+
                     <textarea id="task-description" name="task-description" maxLength="30" ref={detailInput}></textarea>
+
                     <br/>
+
                     <label htmlFor="dueDate" ref={dateInput}>Enter due date:</label>
+
                     <br/>
+
                     <input type="date" for="dueDate" name="dueDate" ref={dateInput}></input>
+
                     <br/>
+
                     <input type="button" value="submitTask" onClick={()=>submitTask(taskInput.current.value, detailInput.current.value, dateInput.current.value)}></input>
                </form>
                <br/>
@@ -100,10 +120,15 @@ function Home(){
                          <th>Due date</th>
                     </tr>
                     {tasks.map((task, index)=>{
-                    // const table = task.task;
-                    console.log(task);
+                    // Iterates over the tasks variable to create a table containing all tasks created by the user, handing down all the relavent information through props to the task component
                     return(
-                         <Task task={task} index={index} updateTask={(task, id)=>updateTask(task, id)} deleteTask={(id)=>deleteTask(id)} changeCompletionStatus={(bool, id)=>changeCompletionStatus(bool, id)}/>
+                         <Task
+                              task={task}
+                              index={index}
+                              updateTask={(task, id)=>updateTask(task, id)}
+                              deleteTask={(id)=>deleteTask(id)}
+                              changeCompletionStatus={(bool, id)=>changeCompletionStatus(bool, id)}
+                         />
                          );
                })}</table>
                :
