@@ -20,6 +20,9 @@ export default {
      getTasks: function(user){
           return axios.post("/api/tasks/by-author", user);
      },
+     getTask: function(id){
+          return axios.get(`/api/tasks/task/${id}`);
+     },
      deleteTask: function(id){
           return axios.delete(`/api/tasks/${id}`);
      }

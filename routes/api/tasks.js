@@ -9,6 +9,10 @@ router.route("/")
 router.route("/new")
      .post(tasksController.create);
 
+// Matches with "/api/tasks/task/:id"
+router.route("/task/:id")
+     .get(tasksController.findById);
+
 // Matches with "/api/tasks/:id"
 router
      .route("/:id")

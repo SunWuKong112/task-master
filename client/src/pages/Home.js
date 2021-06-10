@@ -14,6 +14,9 @@ function Home(){
 
      // Sends a new task to the server
      function submitTask(title, detail, date){
+          taskInput.current.value = "";
+          detailInput.current.value = "";
+          dateInput.current.value = "";
           const task = {
                author_id: currentUser._id,
                title: title,
@@ -89,8 +92,8 @@ function Home(){
                     </tr>
                     <tr>
                          <th><input id="task-title" name="task-title" maxLength="10" ref={taskInput}></input></th>
-                         <th><textarea id="task-description" name="task-description" maxLength="30" ref={detailInput}></textarea></th>
-                         <th><input type="date" for="dueDate" name="dueDate" ref={dateInput}></input></th>
+                         <th><textarea id="task-description" name="task-description" maxLength="500" ref={detailInput}></textarea></th>
+                         <th><input type="date" htmlFor="dueDate" name="dueDate" ref={dateInput}></input></th>
                     </tr>
                </table>
                <input type="button" value="submitTask" onClick={()=>{
@@ -102,7 +105,7 @@ function Home(){
 
                {JSON.stringify(tasks) !== "[]" ?
                <div>
-               <table>
+               <table border="1">
                     <tr>
                          <th>Title</th>
                          <th>Details</th>
@@ -112,7 +115,7 @@ function Home(){
                     {tasks.map((task, index)=>{
                     // Iterates over the tasks variable to create a table containing all tasks created by the user, handing down all the relavent information through props to the task component
                     return(
-                         <Task
+                         <Task key={index}
                               task={task}
                               index={index}
                               updateTask={(task, id)=>updateTask(task, id)}

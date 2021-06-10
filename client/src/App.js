@@ -4,6 +4,7 @@ import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import Edit from "./pages/Edit";
 import React from "react";
 import {Route, BrowserRouter} from 'react-router-dom';
 
@@ -22,6 +23,8 @@ function App() {
           <Route exact path="/signup" component={Signup}></Route>
           {/*Path to users home page*/}
           <Route exact path="/home/:username" component={Home}></Route>
+          {/* Path to the task editing page */}
+          <Route exact path="/home/edit/:taskId" component={Edit}></Route>
         </BrowserRouter>
       </header>
     </div>
