@@ -19,11 +19,11 @@ function Signup(){
           .then((response)=>{
                console.log(response);
                setResponse(response.data.response);
-               if(response.data.action == "clear all"){
+               if(response.data.action === "clear all"){
                     usernameInput.current.value = "";
                     emailInput.current.value = "";
                     passwordInput.current.value = "";
-               }else if(response.data.action == "clear password"){
+               }else if(response.data.action === "clear password"){
                     passwordInput.current.value = "";
                }
           })
@@ -36,15 +36,15 @@ function Signup(){
                <h5>Sign up</h5>
                {response ? <p>{response}</p> : <span></span>}
                <form>
-                    <label for="username-input">Username:</label>
+                    <label htmlFor="username-input">Username:</label>
                     <br/>
                     <input id="username-input" name="username-input" ref={usernameInput} placeholder="johnDoe1234"></input>
                     <br/>
-                    <label for="email-input">Email:</label>
+                    <label htmlFor="email-input">Email:</label>
                     <br/>
                     <input id="email-input" name="email-input" ref={emailInput} placeholder="johndoe@gmail.com"></input>
                     <br/>
-                    <label for="password-input">password:</label>
+                    <label htmlFor="password-input">password:</label>
                     <br/>
                     <input type="password" id="password-input" name="password-input" ref={passwordInput} placeholder="password123"></input>
                     <br/>

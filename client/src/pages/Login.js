@@ -28,10 +28,10 @@ function Login(){
                if(response){
                     if(response.data.response){
                          setResponse(response.data.response);
-                         if(response.data.action == "clear all"){
+                         if(response.data.action === "clear all"){
                               emailInput.current.value = "";
                               passwordInput.current.value = "";
-                         }else if(response.data.action == "clear password"){
+                         }else if(response.data.action === "clear password"){
                               passwordInput.current.value = "";
                          }
                     }else if(response.data.user[0]){
@@ -50,14 +50,14 @@ function Login(){
                <h5>Login</h5>
                {response ? <p>{response}</p> : <span></span>}
                <form onSubmit={()=>submitLogin(emailInput.current.value, passwordInput.current.value)}>
-                    <label for="emailInput">Email:</label>
+                    <label htmlFor="emailInput">Email:</label>
                     <br/>
                     <input href id="emailInput" name="emailInput" ref={emailInput} placeholder="johnDoe1234@gmail.com"
                     // onkeypress={(e)=>clickPress(e)}
                     ></input>
                     <br/>
                     <br/>
-                    <label for="passwordInput">Password:</label>
+                    <label htmlFor="passwordInput">Password:</label>
                     <br/>
                     <input id="passwordInput" name="passwordInput" ref={passwordInput} type="password" placeholder="ps1234"
                     // onkeypress={(e)=>clickPress(e)}

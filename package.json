@@ -10,9 +10,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "predeploy": "npm run build",
-    "deploy":"gh-pages -d build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +20,7 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "express": "^4.16.3",
     "gh-pages": "^3.2.0",
     "http-errors": "^1.8.0",

@@ -9,8 +9,6 @@ function Home(){
      const taskInput = useRef();
      const detailInput = useRef();
      const dateInput = useRef();
-     const updateDetail = useRef();
-     const updateDueDate = useRef();
      const [tasks, setTasks] = useState([]);
      const {currentUser, setUser} = useContext(StoreContext);
 
@@ -31,10 +29,6 @@ function Home(){
           });
      }
 
-     useEffect(()=>{
-          getTasks();
-     }, [currentUser]);
-
      function getTasks(){
           if(currentUser._id){
                API.getTasks({author_id:currentUser._id})
@@ -49,6 +43,10 @@ function Home(){
                history.push("/login");
           }
      }
+
+     useEffect(()=>{
+          getTasks();
+     }, [currentUser]);
 
      function updateTask(task, id){
           API.updateTask(task, id)
@@ -78,15 +76,15 @@ function Home(){
           <div>
                <button onClick={()=>{setUser([])}}>Log out</button>
                <form>
-                    <label for="task-title">Enter task:</label>
+                    <label htmlFor="task-title">Enter task:</label>
                     <br/>
                     <input id="task-title" name="task-title" maxLength="10" ref={taskInput}></input>
                     <br/>
-                    <label for="task-description">Enter Description:</label>
+                    <label htmlFor="task-description">Enter Description:</label>
                     <br/>
                     <textarea id="task-description" name="task-description" maxLength="30" ref={detailInput}></textarea>
                     <br/>
-                    <label for="dueDate" ref={dateInput}>Enter due date:</label>
+                    <label htmlFor="dueDate" ref={dateInput}>Enter due date:</label>
                     <br/>
                     <input type="date" for="dueDate" name="dueDate" ref={dateInput}></input>
                     <br/>
