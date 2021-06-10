@@ -40,7 +40,7 @@ app.use('/', router);
 // });
 
 mongoose.set('returnOriginal', false);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/task-master", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect(process.env.npm || "mongodb://localhost/task-master", {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
