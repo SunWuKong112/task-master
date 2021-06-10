@@ -43,7 +43,7 @@ module.exports = {
   create: function(req, res) {
     db.User
       .create(req.body)
-      .then(dbModel => res.json({response: "Account created successfully.", action: "clear all"}))
+      .then(dbModel => res.json({response: "Account created successfully.", action: "clear all", dbModel: dbModel}))
       .catch(err =>{
         res.json({response:"Username or email already associated with an account.", action: "clear all", err:err});
       });

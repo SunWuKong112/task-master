@@ -20,11 +20,10 @@ function Home(){
                detail: detail,
                dueDate: date
           };
-          console.log(task);
           API.submitTask(task)
           .then(response=>{
                console.log(response);
-               setTasks([...tasks, response]);
+               getTasks();
           }).catch(err=>{
                console.log(err);
           });
@@ -39,7 +38,6 @@ function Home(){
                     const data = response.data;
                     setTasks([]);
                     const task = data.tasks;
-                    console.log(task);
                     setTasks([...task]);
                });
           }else{
@@ -83,35 +81,27 @@ function Home(){
           <div>
                {/* Logs the user out by setting the currentUser to [], activating the getTasks function which automatically redirects the user if there is no currentUser */}
                <button onClick={()=>{setUser([])}}>Log out</button>
-               <form>
-                    <label htmlFor="task-title">Enter task:</label>
+               <table>
+                    <tr>
+                         <th><label htmlFor="task-title">Enter task</label></th>
+                         <th><label htmlFor="task-description">Enter Description</label></th>
+                         <th><label htmlFor="dueDate" ref={dateInput}>Enter due date:</label></th>
+                    </tr>
+                    <tr>
+                         <th><input id="task-title" name="task-title" maxLength="10" ref={taskInput}></input></th>
+                         <th><textarea id="task-description" name="task-description" maxLength="30" ref={detailInput}></textarea></th>
+                         <th><input type="date" for="dueDate" name="dueDate" ref={dateInput}></input></th>
+                    </tr>
+               </table>
+               <input type="button" value="submitTask" onClick={()=>{
+                    submitTask(taskInput.current.value, detailInput.current.value, dateInput.current.value);
+               }}></input>
 
-                    <br/>
-
-                    <input id="task-title" name="task-title" maxLength="10" ref={taskInput}></input>
-
-                    <br/>
-
-                    <label htmlFor="task-description">Enter Description:</label>
-
-                    <br/>
-
-                    <textarea id="task-description" name="task-description" maxLength="30" ref={detailInput}></textarea>
-
-                    <br/>
-
-                    <label htmlFor="dueDate" ref={dateInput}>Enter due date:</label>
-
-                    <br/>
-
-                    <input type="date" for="dueDate" name="dueDate" ref={dateInput}></input>
-
-                    <br/>
-
-                    <input type="button" value="submitTask" onClick={()=>submitTask(taskInput.current.value, detailInput.current.value, dateInput.current.value)}></input>
-               </form>
                <br/>
+               <br/>
+
                {JSON.stringify(tasks) !== "[]" ?
+               <div>
                <table>
                     <tr>
                          <th>Title</th>
@@ -131,12 +121,13 @@ function Home(){
                          />
                          );
                })}</table>
-               :
-               <span></span>}
-               <button onClick={()=>{
+               {tasks.length > 3 ?<button onClick={()=>{
                     setUser([]);
                     history.push("/login");
-               }}>Log out</button>
+               }}>Log out</button>:<span></span>}
+               </div>
+               :
+               <span></span>}
           </div>
      );
 }
