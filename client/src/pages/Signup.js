@@ -24,11 +24,14 @@ function Signup(){
                     usernameInput.current.value = "";
                     emailInput.current.value = "";
                     passwordInput.current.value = "";
+                    if(response.data.err){
+                         console.log(response.data.err);
+                    }
                }else if(response.data.action === "clear password"){
                     passwordInput.current.value = "";
-               }
-               if(response.data.err){
-                    console.log(response.data.err);
+                    if(response.data.err){
+                         console.log(response.data.err);
+                    }
                }
           })
           .catch(err=>console.log(err));

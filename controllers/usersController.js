@@ -45,7 +45,6 @@ module.exports = {
       .create(req.body)
       .then(dbModel => res.json({response: "Account created successfully.", action: "clear all"}))
       .catch(err =>{
-        console.log(err);
         res.json({response:"Username or email already associated with an account.", action: "clear all", err:err});
       });
   },
