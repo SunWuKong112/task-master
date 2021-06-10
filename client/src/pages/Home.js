@@ -49,6 +49,7 @@ function Home(){
      }
 
      // Automatically calls the getTasks function on loading the page
+     // This function is called in the .then() of all the other API functions to update the task data, as well as automatically check for whether the user has been logged out
      useEffect(()=>{
           getTasks();
      }, [currentUser]);
